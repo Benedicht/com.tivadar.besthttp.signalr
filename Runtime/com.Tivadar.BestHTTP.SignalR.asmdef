@@ -1,0 +1,18 @@
+{
+    "name": "com.Tivadar.BestHTTP.SignalR",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9069ac25d95ca17448a247f3bb1c769f",
+        "GUID:3a7acb47661a3834a8059a91722b9e04",
+        "GUID:bba0e49b0b1b9924ab06cd58867f661c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
