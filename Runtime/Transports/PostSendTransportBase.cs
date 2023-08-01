@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 
 using BestHTTP.HTTP;
+using BestHTTP.HTTP.Forms;
 using BestHTTP.SignalR.Messages;
 
 namespace BestHTTP.SignalR.Transports
@@ -30,8 +31,8 @@ namespace BestHTTP.SignalR.Transports
             var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Send, this), HTTPMethods.Post, OnSendRequestFinished);
             request.DisableCache = true;
 
-            request.FormUsage = HTTP.Forms.HTTPFormUsage.UrlEncoded;
-            request.AddField("data", json);
+            request.Upload.UploadStream = new UrlEncodedStream()
+                .AddField("data", json);
 
             Connection.PrepareRequest(request, RequestTypes.Send);
 

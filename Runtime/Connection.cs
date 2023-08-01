@@ -1230,7 +1230,7 @@ namespace BestHTTP.SignalR
             HTTPManager.Logger.Information("SignalR Connection", "Sending Ping request.");
 
             PingRequest = new HTTPRequest((this as IConnection).BuildUri(RequestTypes.Ping), OnPingRequestFinished);
-            PingRequest.ConnectTimeout = PingInterval;
+            PingRequest.Timeout.ConnectTimeout = PingInterval;
 
             (this as IConnection).PrepareRequest(PingRequest, RequestTypes.Ping);
 

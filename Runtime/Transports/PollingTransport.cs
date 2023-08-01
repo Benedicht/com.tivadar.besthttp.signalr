@@ -234,7 +234,7 @@ namespace BestHTTP.SignalR.Transports
 
             Connection.PrepareRequest(pollRequest, RequestTypes.Poll);
 
-            pollRequest.Timeout = this.PollTimeout;
+            pollRequest.Timeout.Timeout = this.PollTimeout;
 
             pollRequest.Send();
         }

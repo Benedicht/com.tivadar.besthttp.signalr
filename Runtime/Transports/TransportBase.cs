@@ -135,9 +135,9 @@ namespace BestHTTP.SignalR.Transports
                 request.DisableCache = true;
 
                 request.Tag = 0;
-                request.MaxRetries = 0;
+                request.Retry.MaxRetries = 0;
 
-                request.Timeout = Connection.NegotiationResult.ConnectionTimeout + TimeSpan.FromSeconds(10);
+                request.Timeout.Timeout = Connection.NegotiationResult.ConnectionTimeout + TimeSpan.FromSeconds(10);
 
                 Connection.PrepareRequest(request, RequestTypes.Start);
 
@@ -224,7 +224,7 @@ namespace BestHTTP.SignalR.Transports
 
             // Retry counter
             request.Tag = 0;
-            request.MaxRetries = 0;
+            request.Retry.MaxRetries = 0;
 
             Connection.PrepareRequest(request, RequestTypes.Abort);
 
