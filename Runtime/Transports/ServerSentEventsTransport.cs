@@ -1,6 +1,3 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-#if !BESTHTTP_DISABLE_SERVERSENT_EVENTS
-
 using System;
 
 using BestHTTP.ServerSentEvents;
@@ -166,6 +163,3 @@ namespace BestHTTP.SignalR.Transports
         #endregion
     }
 }
-
-#endif
-#endif

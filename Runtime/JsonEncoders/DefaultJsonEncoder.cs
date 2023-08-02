@@ -1,5 +1,3 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-
 using BestHTTP.JSON;
 using System.Collections.Generic;
 
@@ -20,5 +18,3 @@ namespace BestHTTP.SignalR.JsonEncoders
         }
     }
 }
-
-#endif

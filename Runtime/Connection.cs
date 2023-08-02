@@ -1,22 +1,19 @@
-#if !BESTHTTP_DISABLE_SIGNALR
-
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 using BestHTTP.Extensions;
-using BestHTTP.SignalR.Hubs;
-using BestHTTP.SignalR.Messages;
-using BestHTTP.SignalR.Transports;
-using BestHTTP.SignalR.JsonEncoders;
-using BestHTTP.SignalR.Authentication;
-
-using PlatformSupport.Collections.ObjectModel;
+using BestHTTP.HTTP;
 using BestHTTP.HTTP.Connections;
 using BestHTTP.PlatformSupport.Text;
+using BestHTTP.SignalR.Authentication;
+using BestHTTP.SignalR.Hubs;
+using BestHTTP.SignalR.JsonEncoders;
+using BestHTTP.SignalR.Messages;
+using BestHTTP.SignalR.Transports;
 
+using PlatformSupport.Collections.ObjectModel;
 using PlatformSupport.Collections.Specialized;
-using BestHTTP.HTTP;
 
 namespace BestHTTP.SignalR
 {
@@ -513,31 +510,15 @@ namespace BestHTTP.SignalR
 
             this.Protocol = (ProtocolVersions)protocolIdx;
 
-            #if !BESTHTTP_DISABLE_WEBSOCKET
             if (data.TryWebSockets)
             {
                 Transport = new WebSocketTransport(this);
-
-                #if !BESTHTTP_DISABLE_SERVERSENT_EVENTS
-                    NextProtocolToTry = SupportedProtocols.ServerSentEvents;
-                #else
-                    NextProtocolToTry = SupportedProtocols.HTTP;
-                #endif
+                NextProtocolToTry = SupportedProtocols.ServerSentEvents;
             }
             else
-            #endif
             {
-                #if !BESTHTTP_DISABLE_SERVERSENT_EVENTS
-                    Transport = new ServerSentEventsTransport(this);
-
-                    // Long-Poll
-                    NextProtocolToTry = SupportedProtocols.HTTP;
-                #else
-
-                    Transport = new PollingTransport(this);
-
-                    NextProtocolToTry = SupportedProtocols.Unknown;
-                #endif
+                Transport = new ServerSentEventsTransport(this);
+                NextProtocolToTry = SupportedProtocols.HTTP;
             }
 
             this.State = ConnectionStates.Connecting;
@@ -918,10 +899,8 @@ namespace BestHTTP.SignalR
                     goto default;
 
                 case RequestTypes.Connect:
-#if !BESTHTTP_DISABLE_WEBSOCKET
                     if (transport != null && transport.Type == TransportTypes.WebSocket)
                         uriBuilder.Scheme = HTTPProtocolFactory.IsSecureProtocol(Uri) ? "wss" : "ws";
-#endif
 
                     uriBuilder.Path += "connect";
                     goto default;
@@ -955,10 +934,8 @@ namespace BestHTTP.SignalR
                     goto default;
 
                 case RequestTypes.Reconnect:
-#if !BESTHTTP_DISABLE_WEBSOCKET
                     if (transport != null && transport.Type == TransportTypes.WebSocket)
                         uriBuilder.Scheme = HTTPProtocolFactory.IsSecureProtocol(Uri) ? "wss" : "ws";
-#endif
 
                     uriBuilder.Path += "reconnect";
 
@@ -1175,18 +1152,14 @@ namespace BestHTTP.SignalR
 
                 switch(NextProtocolToTry)
                 {
-#if !BESTHTTP_DISABLE_WEBSOCKET
                     case SupportedProtocols.WebSocket:
                         Transport = new WebSocketTransport(this);
                         break;
-#endif
 
-#if !BESTHTTP_DISABLE_SERVERSENT_EVENTS
                     case SupportedProtocols.ServerSentEvents:
                         Transport = new ServerSentEventsTransport(this);
                         NextProtocolToTry = SupportedProtocols.HTTP;
                         break;
-#endif
 
                     case SupportedProtocols.HTTP:
                         Transport = new PollingTransport(this);
@@ -1292,5 +1265,3 @@ namespace BestHTTP.SignalR
         #endregion
     }
 }
-
-#endif

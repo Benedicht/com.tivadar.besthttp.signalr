@@ -1,5 +1,3 @@
-#if !BESTHTTP_DISABLE_SIGNALR
-
 using System.Collections.Generic;
 
 using BestHTTP.HTTP;
@@ -99,5 +97,3 @@ namespace BestHTTP.SignalR.Transports
         #endregion
     }
 }
-
-#endif

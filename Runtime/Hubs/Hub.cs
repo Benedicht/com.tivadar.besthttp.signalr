@@ -1,10 +1,8 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 using BestHTTP.SignalR.Messages;
-using System.Text;
 
 namespace BestHTTP.SignalR.Hubs
 {
@@ -387,5 +385,3 @@ namespace BestHTTP.SignalR.Hubs
         #endregion
     }
 }
-
-#endif

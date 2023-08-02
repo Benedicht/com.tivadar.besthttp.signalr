@@ -1,5 +1,3 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-
 using System;
 
 using BestHTTP.SignalR.Messages;
@@ -20,5 +18,3 @@ namespace BestHTTP.SignalR.Hubs
         void OnMessage(IServerMessage msg);
     }
 }
-
-#endif

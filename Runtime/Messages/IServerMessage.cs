@@ -1,5 +1,3 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-
 using System;
 
 namespace BestHTTP.SignalR.Messages
@@ -15,5 +13,3 @@ namespace BestHTTP.SignalR.Messages
         UInt64 InvocationId { get; }
     }
 }
-
-#endif

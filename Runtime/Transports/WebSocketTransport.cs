@@ -1,14 +1,6 @@
-#if !BESTHTTP_DISABLE_SIGNALR
-#if !BESTHTTP_DISABLE_WEBSOCKET
-
 using System;
-using System.Text;
 
-using BestHTTP;
-using BestHTTP.JSON;
-using BestHTTP.SignalR.Hubs;
 using BestHTTP.SignalR.Messages;
-using BestHTTP.SignalR.JsonEncoders;
 
 namespace BestHTTP.SignalR.Transports
 {
@@ -169,6 +161,3 @@ namespace BestHTTP.SignalR.Transports
 #endregion
     }
 }
-
-#endif
-#endif

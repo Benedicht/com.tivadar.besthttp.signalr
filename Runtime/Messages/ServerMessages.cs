@@ -1,5 +1,3 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-
 #if BESTHTTP_SIGNALR_WITH_JSONDOTNET
 using Newtonsoft.Json.Linq;
 #endif
@@ -350,5 +348,3 @@ namespace BestHTTP.SignalR.Messages
         }
     }
 }
-
-#endif

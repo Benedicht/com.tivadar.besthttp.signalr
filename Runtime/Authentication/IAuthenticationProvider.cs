@@ -1,5 +1,3 @@
-#if !BESTHTTP_DISABLE_SIGNALR
-
 namespace BestHTTP.SignalR.Authentication
 {
     public delegate void OnAuthenticationSuccededDelegate(IAuthenticationProvider provider);
@@ -33,5 +31,3 @@ namespace BestHTTP.SignalR.Authentication
         void PrepareRequest(HTTP.HTTPRequest request, RequestTypes type);
     }
 }
-
-#endif

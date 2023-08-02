@@ -1,5 +1,3 @@
-﻿#if !BESTHTTP_DISABLE_SIGNALR
-
 namespace BestHTTP.SignalR
 {
     /// <summary>
@@ -192,5 +190,3 @@ namespace BestHTTP.SignalR
         Closed
     }
 }
-
-#endif
