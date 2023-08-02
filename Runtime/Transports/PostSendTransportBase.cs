@@ -27,7 +27,7 @@ namespace BestHTTP.SignalR.Transports
         protected override void SendImpl(string json)
         {
             var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Send, this), HTTPMethods.Post, OnSendRequestFinished);
-            request.DisableCache = true;
+            request.Download.DisableCache = true;
 
             request.Upload.UploadStream = new UrlEncodedStream()
                 .AddField("data", json);

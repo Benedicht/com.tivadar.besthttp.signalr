@@ -101,7 +101,7 @@ namespace BestHTTP.SignalR
         public void Start()
         {
             NegotiationRequest = new HTTPRequest(Connection.BuildUri(RequestTypes.Negotiate), HTTPMethods.Get, OnNegotiationRequestFinished);
-            NegotiationRequest.DisableCache = true;
+            NegotiationRequest.Download.DisableCache = true;
 
             Connection.PrepareRequest(NegotiationRequest, RequestTypes.Negotiate);
             NegotiationRequest.Send();

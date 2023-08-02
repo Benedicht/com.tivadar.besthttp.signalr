@@ -62,7 +62,7 @@ namespace BestHTTP.SignalR.Transports
             RequestTypes requestType = this.State == TransportStates.Reconnecting ? RequestTypes.Reconnect : RequestTypes.Connect;
 
             var request = new HTTPRequest(Connection.BuildUri(requestType, this), HTTPMethods.Get, OnConnectRequestFinished);
-            request.DisableCache = true;
+            request.Download.DisableCache = true;
 
             Connection.PrepareRequest(request, requestType);
 
@@ -228,7 +228,7 @@ namespace BestHTTP.SignalR.Transports
         private void Poll()
         {
             pollRequest = new HTTPRequest(Connection.BuildUri(RequestTypes.Poll, this), HTTPMethods.Get, OnPollRequestFinished);
-            pollRequest.DisableCache = true;
+            pollRequest.Download.DisableCache = true;
 
             Connection.PrepareRequest(pollRequest, RequestTypes.Poll);
 

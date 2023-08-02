@@ -130,7 +130,7 @@ namespace BestHTTP.SignalR.Transports
             if (this.Connection.Protocol > ProtocolVersions.Protocol_2_0)
             {
                 var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Start, this), HTTPMethods.Get, OnStartRequestFinished);
-                request.DisableCache = true;
+                request.Download.DisableCache = true;
 
                 request.Tag = 0;
                 request.Retry.MaxRetries = 0;
@@ -218,7 +218,7 @@ namespace BestHTTP.SignalR.Transports
             this.State = TransportStates.Closing;
 
             var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Abort, this), HTTPMethods.Get, OnAbortRequestFinished);
-            request.DisableCache = true;
+            request.Download.DisableCache = true;
 
             // Retry counter
             request.Tag = 0;
