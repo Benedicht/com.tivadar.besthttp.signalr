@@ -1,5 +1,6 @@
 using System;
 
+using BestHTTP.Shared.Logger;
 using BestHTTP.SignalR.Messages;
 
 namespace BestHTTP.SignalR.Transports
@@ -150,7 +151,7 @@ namespace BestHTTP.SignalR.Transports
             }
             else
             {
-                if (HTTPManager.Logger.Level == Logger.Loglevels.All)
+                if (HTTPManager.Logger.Level == Loglevels.All)
                     HTTPManager.Logger.Error("WebSocketTransport", "WSocket_OnError " + reason);
 
                 this.State = TransportStates.Closed;

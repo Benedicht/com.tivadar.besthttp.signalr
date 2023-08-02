@@ -6,6 +6,7 @@ using BestHTTP.Extensions;
 using BestHTTP.HTTP;
 using BestHTTP.HTTP.Connections;
 using BestHTTP.PlatformSupport.Text;
+using BestHTTP.Shared.Logger;
 using BestHTTP.SignalR.Authentication;
 using BestHTTP.SignalR.Hubs;
 using BestHTTP.SignalR.JsonEncoders;
@@ -1083,7 +1084,7 @@ namespace BestHTTP.SignalR
                     }
                     else if (now - ReconnectDelayStartedAt >= ReconnectDelay)
                     {
-                        if (HTTPManager.Logger.Level <= Logger.Loglevels.Warning)
+                        if (HTTPManager.Logger.Level <= Loglevels.Warning)
                           HTTPManager.Logger.Warning("SignalR Connection", this.ReconnectStarted.ToString() + " " + this.ReconnectStartedAt.ToString() + " " + NegotiationResult.DisconnectTimeout.ToString());
                         Reconnect();
                     }
