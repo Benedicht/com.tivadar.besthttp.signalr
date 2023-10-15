@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using BestHTTP.Extensions;
-using BestHTTP.HTTP;
-using BestHTTP.HTTP.Connections;
-using BestHTTP.PlatformSupport.Text;
-using BestHTTP.Shared.Logger;
-using BestHTTP.SignalR.Authentication;
-using BestHTTP.SignalR.Hubs;
-using BestHTTP.SignalR.JsonEncoders;
-using BestHTTP.SignalR.Messages;
-using BestHTTP.SignalR.Transports;
+using Best.HTTP;
+using Best.HTTP.Hosts.Connections;
+using Best.HTTP.Shared;
+using Best.HTTP.Shared.Extensions;
+using Best.HTTP.Shared.Logger;
+using Best.HTTP.Shared.PlatformSupport.Text;
+using Best.SignalR.Authentication;
+using Best.SignalR.Hubs;
+using Best.SignalR.JsonEncoders;
+using Best.SignalR.Messages;
+using Best.SignalR.Transports;
 
 using PlatformSupport.Collections.ObjectModel;
 using PlatformSupport.Collections.Specialized;
 
-namespace BestHTTP.SignalR
+namespace Best.SignalR
 {
     public delegate void OnNonHubMessageDelegate(Connection connection, object data);
     public delegate void OnConnectedDelegate(Connection connection);
@@ -1037,7 +1038,7 @@ namespace BestHTTP.SignalR
         /// </summary>
         string IConnection.ParseResponse(string responseStr)
         {
-            Dictionary<string, object> dic = JSON.Json.Decode(responseStr) as Dictionary<string, object>;
+            Dictionary<string, object> dic = HTTP.JSON.Json.Decode(responseStr) as Dictionary<string, object>;
 
             if (dic == null)
             {
@@ -1204,7 +1205,7 @@ namespace BestHTTP.SignalR
             HTTPManager.Logger.Information("SignalR Connection", "Sending Ping request.");
 
             PingRequest = new HTTPRequest((this as IConnection).BuildUri(RequestTypes.Ping), OnPingRequestFinished);
-            PingRequest.Timeout.ConnectTimeout = PingInterval;
+            PingRequest.TimeoutSettings.ConnectTimeout = PingInterval;
 
             (this as IConnection).PrepareRequest(PingRequest, RequestTypes.Ping);
 

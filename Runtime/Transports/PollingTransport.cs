@@ -1,10 +1,11 @@
 using System;
 
-using BestHTTP.Extensions;
-using BestHTTP.HTTP;
-using BestHTTP.SignalR.Messages;
+using Best.HTTP;
+using Best.HTTP.Shared;
+using Best.HTTP.Shared.Extensions;
+using Best.SignalR.Messages;
 
-namespace BestHTTP.SignalR.Transports
+namespace Best.SignalR.Transports
 {
     public sealed class PollingTransport : PostSendTransportBase, IHeartbeat
     {
@@ -62,7 +63,7 @@ namespace BestHTTP.SignalR.Transports
             RequestTypes requestType = this.State == TransportStates.Reconnecting ? RequestTypes.Reconnect : RequestTypes.Connect;
 
             var request = new HTTPRequest(Connection.BuildUri(requestType, this), HTTPMethods.Get, OnConnectRequestFinished);
-            request.Download.DisableCache = true;
+            request.DownloadSettings.DisableCache = true;
 
             Connection.PrepareRequest(request, requestType);
 
@@ -228,11 +229,11 @@ namespace BestHTTP.SignalR.Transports
         private void Poll()
         {
             pollRequest = new HTTPRequest(Connection.BuildUri(RequestTypes.Poll, this), HTTPMethods.Get, OnPollRequestFinished);
-            pollRequest.Download.DisableCache = true;
+            pollRequest.DownloadSettings.DisableCache = true;
 
             Connection.PrepareRequest(pollRequest, RequestTypes.Poll);
 
-            pollRequest.Timeout.Timeout = this.PollTimeout;
+            pollRequest.TimeoutSettings.Timeout = this.PollTimeout;
 
             pollRequest.Send();
         }

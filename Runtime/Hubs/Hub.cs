@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using BestHTTP.SignalR.Messages;
+using Best.HTTP.Shared;
+using Best.SignalR.Messages;
 
-namespace BestHTTP.SignalR.Hubs
+namespace Best.SignalR.Hubs
 {
     public delegate void OnMethodCallDelegate(Hub hub, string method, params object[] args);
     public delegate void OnMethodCallCallbackDelegate(Hub hub, MethodCallMessage methodCall);

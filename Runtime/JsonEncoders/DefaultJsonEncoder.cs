@@ -1,7 +1,7 @@
-using BestHTTP.JSON;
+using Best.HTTP.JSON;
 using System.Collections.Generic;
 
-namespace BestHTTP.SignalR.JsonEncoders
+namespace Best.SignalR.JsonEncoders
 {
     public sealed class DefaultJsonEncoder : IJsonEncoder
     {

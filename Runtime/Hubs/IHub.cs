@@ -1,8 +1,8 @@
 using System;
 
-using BestHTTP.SignalR.Messages;
+using Best.SignalR.Messages;
 
-namespace BestHTTP.SignalR.Hubs
+namespace Best.SignalR.Hubs
 {
     /// <summary>
     /// Interface to be able to hide internally used functions and properties.

@@ -1,6 +1,6 @@
 using System;
 
-namespace BestHTTP.SignalR.Messages
+namespace Best.SignalR.Messages
 {
     public interface IServerMessage
     {

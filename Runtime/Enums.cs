@@ -1,4 +1,4 @@
-namespace BestHTTP.SignalR
+namespace Best.SignalR
 {
     /// <summary>
     /// Possible transport types.

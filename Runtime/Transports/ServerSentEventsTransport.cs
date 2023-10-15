@@ -1,9 +1,10 @@
 using System;
 
-using BestHTTP.ServerSentEvents;
-using BestHTTP.SignalR.Messages;
+using Best.ServerSentEvents;
+using Best.HTTP.Shared;
+using Best.SignalR.Messages;
 
-namespace BestHTTP.SignalR.Transports
+namespace Best.SignalR.Transports
 {
     /// <summary>
     /// A SignalR transport implementation that uses the Server-Sent Events protocol.
@@ -115,7 +116,7 @@ namespace BestHTTP.SignalR.Transports
             HTTPManager.Logger.Information("Transport - " + this.Name, "OnEventSourceOpen");
         }
 
-        private void OnEventSourceMessage(EventSource eventSource, BestHTTP.ServerSentEvents.Message message)
+        private void OnEventSourceMessage(EventSource eventSource, Best.ServerSentEvents.Message message)
         {
             if (message.Data.Equals("initialized"))
             {

@@ -1,4 +1,4 @@
-namespace BestHTTP.SignalR.Authentication
+namespace Best.SignalR.Authentication
 {
     public delegate void OnAuthenticationSuccededDelegate(IAuthenticationProvider provider);
     public delegate void OnAuthenticationFailedDelegate(IAuthenticationProvider provider, string reason);

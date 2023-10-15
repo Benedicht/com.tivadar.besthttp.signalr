@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-using BestHTTP.SignalR.Messages;
-using BestHTTP.SignalR.JsonEncoders;
-using BestHTTP.HTTP;
+using Best.HTTP;
+using Best.HTTP.Shared;
+using Best.SignalR.JsonEncoders;
+using Best.SignalR.Messages;
 
-namespace BestHTTP.SignalR.Transports
+namespace Best.SignalR.Transports
 {
     public delegate void OnTransportStateChangedDelegate(TransportBase transport, TransportStates oldState, TransportStates newState);
 
@@ -130,12 +131,12 @@ namespace BestHTTP.SignalR.Transports
             if (this.Connection.Protocol > ProtocolVersions.Protocol_2_0)
             {
                 var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Start, this), HTTPMethods.Get, OnStartRequestFinished);
-                request.Download.DisableCache = true;
+                request.DownloadSettings.DisableCache = true;
 
                 request.Tag = 0;
-                request.Retry.MaxRetries = 0;
+                request.RetrySettings.MaxRetries = 0;
 
-                request.Timeout.Timeout = Connection.NegotiationResult.ConnectionTimeout + TimeSpan.FromSeconds(10);
+                request.TimeoutSettings.Timeout = Connection.NegotiationResult.ConnectionTimeout + TimeSpan.FromSeconds(10);
 
                 Connection.PrepareRequest(request, RequestTypes.Start);
 
@@ -218,11 +219,11 @@ namespace BestHTTP.SignalR.Transports
             this.State = TransportStates.Closing;
 
             var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Abort, this), HTTPMethods.Get, OnAbortRequestFinished);
-            request.Download.DisableCache = true;
+            request.DownloadSettings.DisableCache = true;
 
             // Retry counter
             request.Tag = 0;
-            request.Retry.MaxRetries = 0;
+            request.RetrySettings.MaxRetries = 0;
 
             Connection.PrepareRequest(request, RequestTypes.Abort);
 

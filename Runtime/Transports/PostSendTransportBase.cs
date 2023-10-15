@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 
-using BestHTTP.HTTP;
-using BestHTTP.HTTP.Forms;
-using BestHTTP.SignalR.Messages;
+using Best.HTTP;
+using Best.HTTP.Request.Upload.Forms;
+using Best.HTTP.Shared;
+using Best.SignalR.Messages;
 
-namespace BestHTTP.SignalR.Transports
+namespace Best.SignalR.Transports
 {
     /// <summary>
     /// A base class for implementations that must send the data in unique requests. These are currently the LongPolling and ServerSentEvents transports.
@@ -27,9 +28,9 @@ namespace BestHTTP.SignalR.Transports
         protected override void SendImpl(string json)
         {
             var request = new HTTPRequest(Connection.BuildUri(RequestTypes.Send, this), HTTPMethods.Post, OnSendRequestFinished);
-            request.Download.DisableCache = true;
+            request.DownloadSettings.DisableCache = true;
 
-            request.Upload.UploadStream = new UrlEncodedStream()
+            request.UploadSettings.UploadStream = new UrlEncodedStream()
                 .AddField("data", json);
 
             Connection.PrepareRequest(request, RequestTypes.Send);

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-using BestHTTP.JSON.LitJson;
+using Best.HTTP.JSON.LitJson;
 
-namespace BestHTTP.SignalR.JsonEncoders
+namespace Best.SignalR.JsonEncoders
 {
     public sealed class LitJsonEncoder : IJsonEncoder
     {

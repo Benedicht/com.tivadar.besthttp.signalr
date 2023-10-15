@@ -1,9 +1,11 @@
 using System;
 
-using BestHTTP.Shared.Logger;
-using BestHTTP.SignalR.Messages;
+using Best.HTTP.Shared;
+using Best.HTTP.Shared.Logger;
+using Best.SignalR.Messages;
+using Best.WebSockets;
 
-namespace BestHTTP.SignalR.Transports
+namespace Best.SignalR.Transports
 {
     public sealed class WebSocketTransport : TransportBase
     {
@@ -14,7 +16,7 @@ namespace BestHTTP.SignalR.Transports
 
         #endregion
 
-        private WebSocket.WebSocket wSocket;
+        private WebSocket wSocket;
 
         public WebSocketTransport(Connection connection)
             : base("webSockets", connection)
@@ -43,7 +45,7 @@ namespace BestHTTP.SignalR.Transports
             Uri uri = Connection.BuildUri(requestType, this);
 
             // Create the WebSocket instance
-            wSocket = new WebSocket.WebSocket(uri);
+            wSocket = new WebSocket(uri);
 
             // Set up eventhandlers
             wSocket.OnOpen += WSocket_OnOpen;
@@ -101,7 +103,7 @@ namespace BestHTTP.SignalR.Transports
 
 #region WebSocket Events
 
-        void WSocket_OnOpen(WebSocket.WebSocket webSocket)
+        void WSocket_OnOpen(WebSocket webSocket)
         {
             if (webSocket != wSocket)
                 return;
@@ -111,7 +113,7 @@ namespace BestHTTP.SignalR.Transports
             OnConnected();
         }
 
-        void WSocket_OnMessage(WebSocket.WebSocket webSocket, string message)
+        void WSocket_OnMessage(WebSocket webSocket, string message)
         {
             if (webSocket != wSocket)
                 return;
@@ -122,7 +124,7 @@ namespace BestHTTP.SignalR.Transports
                 Connection.OnMessage(msg);
         }
 
-        void WSocket_OnClosed(WebSocket.WebSocket webSocket, ushort code, string message)
+        void WSocket_OnClosed(WebSocket webSocket, ushort code, string message)
         {
             if (webSocket != wSocket)
                 return;
@@ -137,7 +139,7 @@ namespace BestHTTP.SignalR.Transports
                 Connection.Error(reason);
         }
 
-        void WSocket_OnError(WebSocket.WebSocket webSocket, string reason)
+        void WSocket_OnError(WebSocket webSocket, string reason)
         {
             if (webSocket != wSocket)
                 return;

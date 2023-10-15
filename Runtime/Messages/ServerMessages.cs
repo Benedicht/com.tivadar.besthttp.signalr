@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BestHTTP.SignalR.Messages
+namespace Best.SignalR.Messages
 {
     /// <summary>
     /// Keep-alive message sent by the server. No data sent with it.

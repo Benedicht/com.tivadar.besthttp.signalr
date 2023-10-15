@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BestHTTP.SignalR.JsonEncoders
+namespace Best.SignalR.JsonEncoders
 {
     /// <summary>
     /// Interface to be able to write custom Json encoders/decoders.

@@ -1,8 +1,8 @@
 using System;
 
-using BestHTTP.SignalR.Hubs;
+using Best.SignalR.Hubs;
 
-namespace BestHTTP.SignalR.Messages
+namespace Best.SignalR.Messages
 {
     /// <summary>
     /// This struct represents a message from the client.

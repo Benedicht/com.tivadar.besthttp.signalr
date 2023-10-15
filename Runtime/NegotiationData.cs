@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-using BestHTTP.HTTP;
-using BestHTTP.JSON;
+using Best.HTTP;
+using Best.HTTP.JSON;
+using Best.HTTP.Shared;
 
-namespace BestHTTP.SignalR
+namespace Best.SignalR
 {
     public sealed class NegotiationData
     {
@@ -101,7 +102,7 @@ namespace BestHTTP.SignalR
         public void Start()
         {
             NegotiationRequest = new HTTPRequest(Connection.BuildUri(RequestTypes.Negotiate), HTTPMethods.Get, OnNegotiationRequestFinished);
-            NegotiationRequest.Download.DisableCache = true;
+            NegotiationRequest.DownloadSettings.DisableCache = true;
 
             Connection.PrepareRequest(NegotiationRequest, RequestTypes.Negotiate);
             NegotiationRequest.Send();
