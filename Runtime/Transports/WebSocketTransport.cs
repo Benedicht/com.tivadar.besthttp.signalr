@@ -51,7 +51,6 @@ namespace Best.SignalR.Transports
             wSocket.OnOpen += WSocket_OnOpen;
             wSocket.OnMessage += WSocket_OnMessage;
             wSocket.OnClosed += WSocket_OnClosed;
-            wSocket.OnError += WSocket_OnError;
 
 #if !UNITY_WEBGL || UNITY_EDITOR
             // prepare the internal http request
@@ -75,7 +74,6 @@ namespace Best.SignalR.Transports
                 wSocket.OnOpen = null;
                 wSocket.OnMessage = null;
                 wSocket.OnClosed = null;
-                wSocket.OnError = null;
                 wSocket.Close();
                 wSocket = null;
             }
@@ -124,12 +122,12 @@ namespace Best.SignalR.Transports
                 Connection.OnMessage(msg);
         }
 
-        void WSocket_OnClosed(WebSocket webSocket, ushort code, string message)
+        void WSocket_OnClosed(WebSocket webSocket, WebSocketStatusCodes code, string message)
         {
             if (webSocket != wSocket)
                 return;
 
-            string reason = code.ToString() + " : " + message;
+            string reason = $"{code} : {message}";
 
             HTTPManager.Logger.Information("WebSocketTransport", "WSocket_OnClosed " + reason);
 
@@ -137,28 +135,6 @@ namespace Best.SignalR.Transports
                 this.State = TransportStates.Closed;
             else
                 Connection.Error(reason);
-        }
-
-        void WSocket_OnError(WebSocket webSocket, string reason)
-        {
-            if (webSocket != wSocket)
-                return;
-
-            // On WP8.1, somehow we receive an exception that the remote server forcibly closed the connection instead of the
-            // WebSocket closed packet... Also, even the /abort request didn't finished.
-            if (this.State == TransportStates.Closing ||
-                this.State == TransportStates.Closed)
-            {
-                base.AbortFinished();
-            }
-            else
-            {
-                if (HTTPManager.Logger.Level == Loglevels.All)
-                    HTTPManager.Logger.Error("WebSocketTransport", "WSocket_OnError " + reason);
-
-                this.State = TransportStates.Closed;
-                Connection.Error(reason);
-            }
         }
 
 #endregion
